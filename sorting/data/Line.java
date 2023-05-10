@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-
 public class Line extends DataType {
     private List<String> elements = new ArrayList<>();
     private String longestLine;

@@ -2,7 +2,6 @@ package sorting.data;
 
 import java.util.List;
 import java.util.Collections;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Longs extends DataType {
@@ -12,7 +11,6 @@ public class Longs extends DataType {
 
     @Override
     void read() {
-        Scanner scanner = new Scanner(System.in);
         long number;
 
         while (scanner.hasNextLong()) {

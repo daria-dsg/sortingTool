@@ -1,12 +1,15 @@
 package sorting.data;
-import java.util.*;
+
+import java.util.List;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Word extends DataType {
     private List<String> elements = new ArrayList<>();
     private String longestWord;
     private int frequency;
     void read() {
-        Scanner scanner = new Scanner(System.in);
         String word;
 
         while (scanner.hasNext()) {

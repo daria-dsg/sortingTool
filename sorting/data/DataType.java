@@ -3,7 +3,7 @@ package sorting.data;
 import java.util.Scanner;
 
 public abstract class DataType {
-    protected Scanner scanner = new Scanner(System.in);
+    protected static Scanner scanner = new Scanner(System.in);
     public void proceed() {
         read();
         compute();
