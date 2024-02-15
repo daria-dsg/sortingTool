@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Integers extends DataType {
+
     private final List<Integer> elements = new ArrayList<>();
+
     @Override
     void read() {
         int number;
@@ -27,9 +29,10 @@ public class Integers extends DataType {
         scanner.close();
         sort();
     }
+
     @Override
-    void compute() {
-    }
+    void compute() {}
+
     @Override
     void print() {
         System.out.printf("Total numbers: %d.%n", elements.size());
@@ -39,6 +42,7 @@ public class Integers extends DataType {
             System.out.print(" ");
         });
     }
+
     private void sort() {
         Collections.sort(elements);
     }
