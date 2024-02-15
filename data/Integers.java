@@ -8,23 +8,33 @@ import java.util.Scanner;
 public class Integers extends DataType {
 
     private List<Integer> elements = new ArrayList<>();
-    private int totalNums;
+    private int amountOfNums;
     @Override
     void read() {
-        Scanner scanner = new Scanner(System.in);
         int number;
 
-        while (scanner.hasNextInt()) {
-            number = scanner.nextInt();
-            elements.add(number);
-        }
+        System.out.println("Enter numbers to sort (press q to quit)");
 
+        while (scanner.hasNext()) {
+            if (scanner.hasNextInt()) {
+                number = scanner.nextInt();
+                elements.add(number);
+            } else {
+                String input = scanner.next();
+                if (input.equalsIgnoreCase("q")) {
+                    break;
+                } else {
+                    System.out.println("Input is not valid. Enter q to quit or number to sort");
+                }
+            }
+        }
+        scanner.close();
         sort();
     }
 
     @Override
     void compute() {
-        totalNums = elements.size();
+        amountOfNums = elements.size();
     }
 
     @Override

@@ -14,8 +14,9 @@ public class Line extends DataType {
     @Override
     void read() {
         String line;
+
         while (scanner.hasNextLine()) {
-            line= scanner.nextLine();
+            line = scanner.nextLine();
             list.add(line);
         }
     }
