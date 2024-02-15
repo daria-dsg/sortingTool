@@ -26,6 +26,8 @@ public class Longs extends DataType {
                 }
             }
         }
+
+        scanner.close();
     }
 
     @Override
