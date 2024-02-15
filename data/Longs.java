@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Longs extends DataType {
-    private List<Long> elements = new ArrayList<>();
+    private final List<Long> elements = new ArrayList<>();
     private long maxNum;
     private int frequency;
 

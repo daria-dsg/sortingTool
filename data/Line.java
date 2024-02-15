@@ -8,7 +8,7 @@ import java.util.Comparator;
 
 public class Line extends DataType {
     private String longestLine;
-    private List<String> list = new ArrayList<>();
+    private final List<String> list = new ArrayList<>();
     private int frequency;
 
     @Override

@@ -2,7 +2,7 @@ package sorting.data;
 import java.util.*;
 
 public class Word extends DataType {
-    private List<String> elements = new ArrayList<>();
+    private final List<String> elements = new ArrayList<>();
     private String longestWord;
     private int frequency;
     void read() {
