@@ -25,6 +25,8 @@ public class Line extends DataType {
                 list.add(input);
             }
         }
+
+        scanner.close();
     }
 
     @Override
