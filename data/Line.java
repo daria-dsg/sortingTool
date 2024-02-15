@@ -13,11 +13,17 @@ public class Line extends DataType {
 
     @Override
     void read() {
-        String line;
+        String input;
+
+        System.out.println("Enter lines to proceed (press q to quit)");
 
         while (scanner.hasNextLine()) {
-            line = scanner.nextLine();
-            list.add(line);
+            input = scanner.nextLine();
+            if (input.equalsIgnoreCase("q")) {
+                break;
+            } else {
+                list.add(input);
+            }
         }
     }
 
@@ -32,6 +38,6 @@ public class Line extends DataType {
         System.out.printf("Total lines: %d.%n", list.size());
         System.out.println("The longest line: ");
         System.out.println(longestLine);
-        System.out.printf("(%d time(s), %d).%n", frequency, (100 * frequency)/ list.size() );
+        System.out.printf("(%d time(s), %d%%).%n ", frequency, (100 * frequency)/ list.size() );
     }
 }
