@@ -3,16 +3,12 @@ package sorting.data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 public class Integers extends DataType {
-
-    private List<Integer> elements = new ArrayList<>();
-    private int amountOfNums;
+    private final List<Integer> elements = new ArrayList<>();
     @Override
     void read() {
         int number;
-
         System.out.println("Enter numbers to sort (press q to quit)");
 
         while (scanner.hasNext()) {
@@ -31,22 +27,18 @@ public class Integers extends DataType {
         scanner.close();
         sort();
     }
-
     @Override
     void compute() {
-        amountOfNums = elements.size();
     }
-
     @Override
     void print() {
         System.out.printf("Total numbers: %d.%n", elements.size());
-        System.out.printf("Sorted data:");
+        System.out.print("Sorted data:");
         elements.forEach(ele -> {
             System.out.print(ele);
             System.out.print(" ");
         });
     }
-
     private void sort() {
         Collections.sort(elements);
     }
