@@ -10,13 +10,11 @@ public class Integers extends DataType {
 
     @Override
     void read() {
-        int number;
         System.out.println("Enter numbers to sort (press q to quit)");
 
         while (scanner.hasNext()) {
             if (scanner.hasNextInt()) {
-                number = scanner.nextInt();
-                elements.add(number);
+                elements.add(scanner.nextInt());
             } else {
                 String input = scanner.next();
                 if (input.equalsIgnoreCase("q")) {
