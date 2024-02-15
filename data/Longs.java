@@ -12,12 +12,19 @@ public class Longs extends DataType {
 
     @Override
     void read() {
-        Scanner scanner = new Scanner(System.in);
-        long number;
+        System.out.println("Enter long numbers to proceed (press q to quit)");
 
-        while (scanner.hasNextLong()) {
-            number = scanner.nextLong();
-            elements.add(number);
+        while(scanner.hasNext()){
+            if (scanner.hasNextLong()) {
+                elements.add(scanner.nextLong());
+            } else {
+                String input = scanner.next();
+                if (input.equalsIgnoreCase("q")) {
+                    break;
+                } else {
+                    System.out.println("Input is not valid. Enter q to quit or number to sort");
+                }
+            }
         }
     }
 
@@ -30,6 +37,6 @@ public class Longs extends DataType {
     @Override
     void print() {
         System.out.printf("Total numbers: %d.%n", elements.size());
-        System.out.printf("The greatest number: %d (%d time(s), %d).%n", maxNum, frequency, (100 * frequency)/ elements.size());
+        System.out.printf("The greatest number: %d (%d time(s), %d%%).%n", maxNum, frequency, (100 * frequency)/ elements.size());
     }
 }
