@@ -1,16 +1,12 @@
 package sorting;
 
-import sorting.data.Integers;
-import sorting.data.Line;
-import sorting.data.Longs;
-import sorting.data.Word;
-import sorting.data.DataType;
+import sorting.data.*;
 
 public class ParseArgs {
 
     private static String sorter;
 
-    public static DataType parseArgs(String[] args) {
+    public static Sorter parseArgs(String[] args) {
         String dataTypeInput = "";
         String sorter;
 
@@ -31,7 +27,7 @@ public class ParseArgs {
         return sorter;
     }
 
-    private static DataType parseDataType(String input) {
+    private static Sorter parseDataType(String input) {
         switch(input) {
             case "long": return new Longs();
             case "line": return new Line();
