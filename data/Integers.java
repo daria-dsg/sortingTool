@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Integers extends DataType {
+public class Integers implements Sorter {
 
-    private final List<Integer> elements = new ArrayList<>();
+    private final List<Integer> elements = new ArrayList<Integer>();
 
-    @Override
-    void read() {
+    public void naturalSort() {
+        read();
+        Collections.sort(elements);
+        print();
+    }
+
+    private void read() {
         System.out.println("Enter numbers to sort (press q to quit)");
 
         while (scanner.hasNext()) {
@@ -25,14 +30,9 @@ public class Integers extends DataType {
             }
         }
         scanner.close();
-        sort();
     }
 
-    @Override
-    void compute() {}
-
-    @Override
-    void print() {
+    private void print() {
         System.out.printf("Total numbers: %d.%n", elements.size());
         System.out.print("Sorted data:");
         elements.forEach(ele -> {
@@ -41,7 +41,5 @@ public class Integers extends DataType {
         });
     }
 
-    private void sort() {
-        Collections.sort(elements);
-    }
+
 }
