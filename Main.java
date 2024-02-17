@@ -1,21 +1,17 @@
 package sorting;
 
+import sorting.data.*;
+
 import java.util.*;
 
 public class Main {
     public static void main(final String[] args) {
-        String dataType = "word";
+        DataType dataToSort = ParseArgs.parseArgs(args);
+        String sortType = ParseArgs.getSorter();
 
-        for (String str : args) {
-            if (str == "-sortIntegers") {
-                dataType = "-sortIntegers";
-                break;
-            } else {
-                dataType = str;
-            }
+        switch(sortType) {
+            case "natural": dataToSort.naturalSort;
+            case "byCount": dataToSort.sortByCount;
         }
-
-        SortingTool sortingTool = new SortingTool(dataType);
-        sortingTool.proceedData();
     }
 }
