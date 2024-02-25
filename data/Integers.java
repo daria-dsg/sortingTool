@@ -9,7 +9,7 @@ import java.util.Comparator;
 
 public class Integers implements Sorter {
 
-    private final List<Integer> numbers = new ArrayList<Integer>();
+    private final List<Integer> numbers = new ArrayList<>();
     private final  LinkedHashMap<Integer,Integer> countMap = new LinkedHashMap<>();
 
     @Override
@@ -43,7 +43,7 @@ public class Integers implements Sorter {
         };
 
         List<Map.Entry<Integer, Integer>> numbersFromMap = new ArrayList<>(countMap.entrySet());
-        Collections.sort(numbersFromMap, sortByCountComparator);
+        numbersFromMap.sort(sortByCountComparator);
 
         countMap.clear();
         for (Map.Entry<Integer,Integer> entry: numbersFromMap) {
@@ -85,5 +85,4 @@ public class Integers implements Sorter {
             System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ numbers.size());
         });
     }
-
 }
