@@ -22,11 +22,11 @@ public class Integers implements Sorter {
     @Override
     public void sortByCount() {
         read();
-        sortingByCount();
+        sort();
         printNumbersAndCount();
     }
 
-    private void sortingByCount() {
+    private void sort() {
         for (int num : numbers) {
             countMap.put(num, countMap.getOrDefault(num,0) + 1);
         }
@@ -46,7 +46,7 @@ public class Integers implements Sorter {
         Collections.sort(numbersFromMap, sortByCountComparator);
 
         countMap.clear();
-        for(Map.Entry<Integer,Integer> entry: numbersFromMap) {
+        for (Map.Entry<Integer,Integer> entry: numbersFromMap) {
             countMap.put(entry.getKey(), entry.getValue());
         }
     }
