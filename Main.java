@@ -18,7 +18,6 @@ public class Main {
             case "byCount":
                 dataToSort.sortByCount();
                 break;
-            default: throw new IllegalArgumentException("No sorting type defined!");
         }
     }
 }
