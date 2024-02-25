@@ -67,7 +67,7 @@ public class Word implements Sorter {
     private void printWords() {
         System.out.printf("Total words: %d.%n", words.size());
         System.out.println("Sorted data: ");
-        words.forEach(word -> {System.out.print(word + " ");});
+        words.forEach(word -> System.out.print(word + " "));
     }
 
     private void printWordsAndCount() {
