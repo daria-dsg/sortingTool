@@ -4,19 +4,16 @@ import sorting.data.*;
 
 public class ParseArgs {
 
-    private static String sorter;
+    private static String sorter = "natural";
 
     public static Sorter parseArgs(String[] args) {
         String dataTypeInput = "";
-        String sorter;
 
         for (int i = 0; i < args.length; i++ ) {
             if ("-sortingType".equals(args[i])) {
                 sorter = args[i + 1];
             } else if ("-dataType".equals(args[i])) {
                 dataTypeInput = args[i + 1];
-            } else {
-                sorter = "natural";
             }
         }
 
@@ -28,11 +25,11 @@ public class ParseArgs {
     }
 
     private static Sorter parseDataType(String input) {
-        switch(input) {
-            case "long": return new Longs();
-            case "line": return new Line();
-            case "integer": return new Integers();
-            default: return new Word();
-        }
+        return switch (input) {
+            case "long" -> new Longs();
+            case "line" -> new Line();
+            case "integer" -> new Integers();
+            default -> new Word();
+        };
     }
 }
