@@ -71,11 +71,7 @@ public class Longs implements Sorter {
     private void printLongs() {
         System.out.printf("Total numbers: %d.%n", longs.size());
         System.out.print("Sorted data:");
-        longs.forEach(num -> {
-            System.out.print(num);
-            System.out.print(" ");
-        });
-        System.out.println();
+        longs.forEach(System.out::println);
     }
 
     private void printLongsAndCount() {
