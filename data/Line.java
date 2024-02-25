@@ -1,11 +1,14 @@
 package sorting.data;
 
-import java.util.*;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Line implements Sorter {
-    private String longestLine;
     private final List<String> lines = new ArrayList<>();
-    private int frequency;
 
     private final LinkedHashMap<String, Integer>  countMap= new LinkedHashMap<>();
 
@@ -57,7 +60,7 @@ public class Line implements Sorter {
         };
 
         List<Map.Entry<String,Integer>> linesFromMap = new ArrayList<>(countMap.entrySet());
-        Collections.sort(linesFromMap, sortByCountComparator);
+        linesFromMap.sort(sortByCountComparator);
 
         countMap.clear();
         for (Map.Entry<String,Integer> entry : linesFromMap) {
@@ -75,6 +78,6 @@ public class Line implements Sorter {
 
     private void printLines() {
         System.out.printf("Total lines: %d.%n", lines.size());
-        lines.forEach(line -> System.out.println(line));
+        lines.forEach(System.out::println);
     }
 }
