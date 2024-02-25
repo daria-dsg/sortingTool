@@ -69,10 +69,15 @@ public class Line implements Sorter {
         frequency = Collections.frequency(lines, longestLine);
     }
 
+//    private void printLines() {
+//        System.out.printf("Total lines: %d.%n", lines.size());
+//        System.out.println("The longest line: ");
+//        System.out.println(longestLine);
+//        System.out.printf("(%d time(s), %d%%).%n ", frequency, (100 * frequency)/ lines.size() );
+//    }
+
     private void printLines() {
         System.out.printf("Total lines: %d.%n", lines.size());
-        System.out.println("The longest line: ");
-        System.out.println(longestLine);
-        System.out.printf("(%d time(s), %d%%).%n ", frequency, (100 * frequency)/ lines.size() );
+        lines.forEach(line -> System.out.println(line));
     }
 }
