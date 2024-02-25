@@ -82,7 +82,7 @@ public class Integers implements Sorter {
         System.out.printf("Total numbers: %d.%n", numbers.size());
         countMap.forEach((num, count) -> {
             System.out.print(num + ": ");
-            System.out.printf("(%d time(s), %d%%).%n ",count , (100 * count)/ numbers.size());
+            System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ numbers.size());
         });
     }
 
