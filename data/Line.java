@@ -19,7 +19,8 @@ public class Line implements Sorter {
     @Override
     public void sortByCount() {
         read();
-        sortingByCount();
+        sort();
+        printLinesAndCount();
     }
 
     private void read() {
@@ -39,7 +40,7 @@ public class Line implements Sorter {
         scanner.close();
     }
 
-    private void sortingByCount() {
+    private void sort() {
         for (String line : lines) {
             countMap.put(line, countMap.getOrDefault(line, 0) + 1);
         }
@@ -49,7 +50,7 @@ public class Line implements Sorter {
             int count2 = entry2.getValue();
 
             if (count1 == count2) {
-                return 0;
+                return entry1.getKey().compareTo(entry2.getKey());
             }
 
             return count1 - count2;
@@ -64,17 +65,13 @@ public class Line implements Sorter {
         }
     }
 
-    private void compute() {
-        longestLine = Collections.max(lines, Comparator.comparing(String::length));
-        frequency = Collections.frequency(lines, longestLine);
+    private void printLinesAndCount() {
+        System.out.printf("Total lines: %d.%n", lines.size());
+        countMap.forEach((line, count) -> {
+            System.out.print(line + ": ");
+            System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ lines.size());
+        });
     }
-
-//    private void printLines() {
-//        System.out.printf("Total lines: %d.%n", lines.size());
-//        System.out.println("The longest line: ");
-//        System.out.println(longestLine);
-//        System.out.printf("(%d time(s), %d%%).%n ", frequency, (100 * frequency)/ lines.size() );
-//    }
 
     private void printLines() {
         System.out.printf("Total lines: %d.%n", lines.size());
