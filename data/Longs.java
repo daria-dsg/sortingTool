@@ -1,6 +1,11 @@
 package sorting.data;
 
-import java.util.*;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Longs implements Sorter {
     private final List<Long> longs = new ArrayList<>();
@@ -54,11 +59,11 @@ public class Longs implements Sorter {
             return count1 - count2;
         };
 
-        List<Map.Entry<Long, Integer>> numbersFromMap = new ArrayList<>(countMap.entrySet());
-        Collections.sort(numbersFromMap, sortByCountComparator);
+        List<Map.Entry<Long, Integer>> longsFromMap = new ArrayList<>(countMap.entrySet());
+        longsFromMap.sort(sortByCountComparator);
 
         countMap.clear();
-        for (Map.Entry<Long,Integer> entry: numbersFromMap) {
+        for (Map.Entry<Long,Integer> entry: longsFromMap) {
             countMap.put(entry.getKey(), entry.getValue());
         }
     }
