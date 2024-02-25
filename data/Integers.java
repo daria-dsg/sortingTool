@@ -72,10 +72,7 @@ public class Integers implements Sorter {
     private void printNumbers() {
         System.out.printf("Total numbers: %d.%n", numbers.size());
         System.out.print("Sorted data:");
-        numbers.forEach(num -> {
-            System.out.print(num);
-            System.out.print(" ");
-        });
+        numbers.forEach(System.out::println);
     }
 
     private void printNumbersAndCount() {
