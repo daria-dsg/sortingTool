@@ -16,14 +16,14 @@ public class Longs implements Sorter {
     public void naturalSort() {
         read();
         Collections.sort(longs);
-        printNumbers();
+        printLongs();
     }
 
     @Override
     public void sortByCount() {
         read();
         sort();
-        printNumbersAndCount();
+        printLongsAndCount();
     }
 
     private void read() {
@@ -68,7 +68,7 @@ public class Longs implements Sorter {
         }
     }
 
-    private void printNumbers() {
+    private void printLongs() {
         System.out.printf("Total numbers: %d.%n", longs.size());
         System.out.print("Sorted data:");
         longs.forEach(num -> {
@@ -78,7 +78,7 @@ public class Longs implements Sorter {
         System.out.println();
     }
 
-    private void printNumbersAndCount() {
+    private void printLongsAndCount() {
         System.out.printf("Total numbers: %d.%n", longs.size());
         countMap.forEach((num, count) -> {
             System.out.print(num + ": ");
