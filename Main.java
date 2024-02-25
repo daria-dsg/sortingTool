@@ -2,8 +2,6 @@ package sorting;
 
 import sorting.data.*;
 
-import java.lang.reflect.Parameter;
-
 public class Main {
     public static void main(final String[] args) {
         ParseArgs.parseArgs(args);
