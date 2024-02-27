@@ -52,8 +52,6 @@ public class Integers implements Sorter {
     }
 
     private void read() {
-        System.out.println("Enter numbers to sort (press q to quit)");
-
         while (scanner.hasNext()) {
             if (scanner.hasNextInt()) {
                 numbers.add(scanner.nextInt());
@@ -62,7 +60,7 @@ public class Integers implements Sorter {
                 if (input.equalsIgnoreCase("q")) {
                     break;
                 } else {
-                    System.out.println("Input is not valid. Enter q to quit or number to sort");
+                    System.out.printf("\"%s\" is not an integer. It will be skipped.%n", input);
                 }
             }
         }
