@@ -44,8 +44,7 @@ public class ParseArgs {
             case "long" -> new Longs();
             case "line" -> new Line();
             case "integer" -> new Integers();
-            case "word" -> new Word();
-            default -> null;
+            default -> new Word();
         };
     }
 
