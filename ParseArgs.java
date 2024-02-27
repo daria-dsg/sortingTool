@@ -9,7 +9,7 @@ import java.util.Set;
 public class ParseArgs {
 
     private static String sorter = "natural";
-    private static String dataType = "word";
+    private static Sorter dataType = new Word();
 
     private static final Set<String> knownArguments = new HashSet<>(Arrays.asList(
             "-sortingType", "-dataType", "line", "word", "integer", "long", "natural", "byCount"
@@ -40,12 +40,7 @@ public class ParseArgs {
     }
 
     public static Sorter getDataType() {
-        return switch (dataType) {
-            case "long" -> new Longs();
-            case "line" -> new Line();
-            case "integer" -> new Integers();
-            default -> new Word();
-        };
+        return dataType;
     }
 
     private static void  checkAndSetSorter(String[] args, int i){
@@ -55,7 +50,12 @@ public class ParseArgs {
 
     private static void  checkAndSetDataType(String[] args, int i){
         checkDataType(args[i + 1]);
-        dataType = args[i+1];
+        dataType = switch (args[i + 1]) {
+            case "long" -> new Longs();
+            case "line" -> new Line();
+            case "integer" -> new Integers();
+            default -> new Word();
+        };
     }
 
     private static void checkDataType(String str) {
