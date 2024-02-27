@@ -11,9 +11,12 @@ public class ParseArgs {
     private static String sorter = "natural";
     private static Sorter dataType = new Word();
 
-    private static final Set<String> knownArguments = new HashSet<>(Arrays.asList(
+    private static final Set<String> KNOWN_ARGUMENTS = new HashSet<>(Arrays.asList(
             "-sortingType", "-dataType", "line", "word", "integer", "long", "natural", "byCount"
     ));
+
+    private static final Set<String> VALID_SORTER_TYPES = Set.of("natural", "byCount");
+    private static final Set<String> VALID_DATA_TYPES = Set.of("line", "word", "integer", "long");
 
     public static void parseArgs(String[] args) {
         for (int i = 0; i < args.length; i++) {
@@ -25,7 +28,7 @@ public class ParseArgs {
                 } else if ("-dataType".equals(argument)) {
                     checkAndSetDataType(args, i);
                     i++;
-                } else if (!knownArguments.contains(argument)) {
+                } else if (!KNOWN_ARGUMENTS.contains(argument)) {
                     System.out.println("\"" + argument + "\" is not a valid parameter. It will be skipped.");
                 }
 
@@ -59,13 +62,13 @@ public class ParseArgs {
     }
 
     private static void checkDataType(String str) {
-        if(!str.equals("line") && !str.equals("word") && !str.equals("integer") && !str.equals("long")) {
+        if(!VALID_DATA_TYPES.contains(str)) {
             throw new IllegalStateException("No data type defined!");
         }
     }
 
     private static void checkSorterType(String str) {
-        if(!str.equals("natural") && !str.equals("byCount") ) {
+        if(!VALID_SORTER_TYPES.contains(str)) {
             throw new IllegalStateException("No sorting type defined!");
         }
     }
