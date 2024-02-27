@@ -11,9 +11,9 @@ public class ParseArgs {
     private static String sorter = "natural";
     private static Sorter dataType = new Word();
 
-    private static final Set<String> KNOWN_ARGUMENTS = new HashSet<>(Arrays.asList(
+    private static final Set<String> KNOWN_ARGUMENTS = Set.of(
             "-sortingType", "-dataType", "line", "word", "integer", "long", "natural", "byCount"
-    ));
+    );
 
     private static final Set<String> VALID_SORTER_TYPES = Set.of("natural", "byCount");
     private static final Set<String> VALID_DATA_TYPES = Set.of("line", "word", "integer", "long");
