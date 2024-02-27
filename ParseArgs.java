@@ -16,16 +16,21 @@ public class ParseArgs {
     ));
 
     public static void parseArgs(String[] args) {
-        checkUnknownArguments(args);
+        int i = 0;
 
-        for (int i = 0; i < args.length; i++ ) {
+        while (i < args.length) {
             String argument = args[i];
             if ("-sortingType".equals(argument)) {
                 checkSorterType(args[i+1]);
                 sorter = args[i + 1];
+                i += 2;
             } else if ("-dataType".equals(argument)) {
-                checkDataType(args[i]);
+                checkDataType(args[i + 1]);
                 dataType = args[i+1];
+                i += 2;
+            } else if(!knownArguments.contains(argument)) {
+                System.out.println("\"" + argument + "\" is not a valid parameter. It will be skipped.");
+                i++;
             }
         }
     }
@@ -53,14 +58,6 @@ public class ParseArgs {
     private static void checkSorterType(String str) {
         if(!str.equals("natural") && !str.equals("byCount") ) {
             throw new IllegalStateException("No sorting type defined!");
-        }
-    }
-
-    private static void checkUnknownArguments(String[] args) {
-        for (int i = 0; i < args.length; i++ ) {
-            if (!knownArguments.contains(args[i])) {
-                throw new IllegalArgumentException("\"" + args[i] + "\" is not a valid parameter. It will be skipped.");
-            }
         }
     }
 }
