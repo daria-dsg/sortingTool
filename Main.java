@@ -10,12 +10,11 @@ public class Main {
         String sortType = ParseArgs.getSorter();
 
         switch(sortType) {
-            case "natural":
-                dataToSort.naturalSort();
-                break;
             case "byCount":
                 dataToSort.sortByCount();
                 break;
+            default:
+                dataToSort.naturalSort();
         }
     }
 }
