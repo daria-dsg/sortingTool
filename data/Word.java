@@ -26,8 +26,6 @@ public class Word implements Sorter {
     }
 
     private void read() {
-        System.out.println("Enter words to proceed (press q to quit)");
-
         while (scanner.hasNext()) {
             String input = scanner.next();
 

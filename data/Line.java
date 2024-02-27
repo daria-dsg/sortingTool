@@ -29,8 +29,6 @@ public class Line implements Sorter {
     private void read() {
         String input;
 
-        System.out.println("Enter lines to proceed (press q to quit)");
-
         while (scanner.hasNextLine()) {
             input = scanner.nextLine();
             if (input.equalsIgnoreCase("q")) {
