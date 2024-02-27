@@ -27,8 +27,6 @@ public class Longs implements Sorter {
     }
 
     private void read() {
-//        System.out.println("Enter long numbers to proceed (press q to quit)");
-
         while(scanner.hasNext()){
             if (scanner.hasNextLong()) {
                 longs.add(scanner.nextLong());
@@ -37,7 +35,7 @@ public class Longs implements Sorter {
                 if (input.equalsIgnoreCase("q")) {
                     break;
                 } else {
-                    System.out.println("Input is not valid. Enter q to quit or number to sort");
+                    System.out.printf("\"%s\" is not a long. It will be skipped.%n", input);
                 }
             }
         }
