@@ -19,18 +19,23 @@ public class ParseArgs {
         int i = 0;
 
         while (i < args.length) {
-            String argument = args[i];
-            if ("-sortingType".equals(argument)) {
-                checkSorterType(args[i+1]);
-                sorter = args[i + 1];
-                i += 2;
-            } else if ("-dataType".equals(argument)) {
-                checkDataType(args[i + 1]);
-                dataType = args[i+1];
-                i += 2;
-            } else if(!knownArguments.contains(argument)) {
-                System.out.println("\"" + argument + "\" is not a valid parameter. It will be skipped.");
-                i++;
+            try {
+                String argument = args[i];
+                if ("-sortingType".equals(argument)) {
+                    checkSorterType(args[i+1]);
+                    sorter = args[i + 1];
+                    i += 2;
+                } else if ("-dataType".equals(argument)) {
+                    checkDataType(args[i + 1]);
+                    dataType = args[i+1];
+                    i += 2;
+                } else if(!knownArguments.contains(argument)) {
+                    System.out.println("\"" + argument + "\" is not a valid parameter. It will be skipped.");
+                    i++;
+                }
+
+            } catch (ArrayIndexOutOfBoundsException e) {
+                break;
             }
         }
     }
