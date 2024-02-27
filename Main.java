@@ -13,8 +13,9 @@ public class Main {
             case "byCount":
                 dataToSort.sortByCount();
                 break;
-            default:
+            case "natural":
                 dataToSort.naturalSort();
+                break;
         }
     }
 }
