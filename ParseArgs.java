@@ -8,8 +8,8 @@ import java.util.Set;
 
 public class ParseArgs {
 
-    private static String sorter;
-    private static String dataType;
+    private static String sorter = "natural";
+    private static String dataType = "word";
 
     private static Set<String> knownArguments = new HashSet<>(Arrays.asList(
             "-sortingType", "-dataType", "line", "word", "integer", "long", "natural", "byCount"
