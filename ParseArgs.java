@@ -16,22 +16,17 @@ public class ParseArgs {
     ));
 
     public static void parseArgs(String[] args) {
-        int i = 0;
-
-        while (i < args.length) {
+        for (int i = 0; i < args.length; i++) {
+            String argument = args[i];
             try {
-                String argument = args[i];
                 if ("-sortingType".equals(argument)) {
-                    checkSorterType(args[i+1]);
-                    sorter = args[i + 1];
-                    i += 2;
-                } else if ("-dataType".equals(argument)) {
-                    checkDataType(args[i + 1]);
-                    dataType = args[i+1];
-                    i += 2;
-                } else if(!knownArguments.contains(argument)) {
-                    System.out.println("\"" + argument + "\" is not a valid parameter. It will be skipped.");
+                    checkAndSetSorter(args, i);
                     i++;
+                } else if ("-dataType".equals(argument)) {
+                    checkAndSetDataType(args, i);
+                    i++;
+                } else if (!knownArguments.contains(argument)) {
+                    System.out.println("\"" + argument + "\" is not a valid parameter. It will be skipped.");
                 }
 
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -51,6 +46,16 @@ public class ParseArgs {
             case "integer" -> new Integers();
             default -> new Word();
         };
+    }
+
+    private static void  checkAndSetSorter(String[] args, int i){
+        checkSorterType(args[i + 1]);
+        sorter = args[i + 1];
+    }
+
+    private static void  checkAndSetDataType(String[] args, int i){
+        checkDataType(args[i + 1]);
+        dataType = args[i+1];
     }
 
     private static void checkDataType(String str) {
