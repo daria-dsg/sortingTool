@@ -7,10 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Line implements Sorter {
+public class Line extends Sorter {
+
     private final List<String> lines = new ArrayList<>();
 
     private final LinkedHashMap<String, Integer>  countMap= new LinkedHashMap<>();
+
+    public Line(String filePath) { super(filePath); }
+
+    public Line() { super();}
 
     @Override
     public void naturalSort() {
@@ -26,11 +31,11 @@ public class Line implements Sorter {
         printLinesAndCount();
     }
 
-    private void read() {
+    void readFromTerminal() {
         String input;
 
-        while (scanner.hasNextLine()) {
-            input = scanner.nextLine();
+        while (scannerFromTerminal.hasNextLine()) {
+            input = scannerFromTerminal.nextLine();
             if (input.equalsIgnoreCase("q")) {
                 break;
             } else {
@@ -38,7 +43,22 @@ public class Line implements Sorter {
             }
         }
 
-        scanner.close();
+        scannerFromTerminal.close();
+    }
+
+    void readFromFile() {
+        String input;
+
+        while (scannerFromFile.hasNextLine()) {
+            input = scannerFromFile.nextLine();
+            if (input.equalsIgnoreCase("q")) {
+                break;
+            } else {
+                lines.add(input);
+            }
+        }
+
+        scannerFromFile.close();
     }
 
     private void sort() {

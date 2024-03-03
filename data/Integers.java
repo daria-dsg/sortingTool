@@ -7,10 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Integers implements Sorter {
+public class Integers extends Sorter {
 
     private final List<Integer> numbers = new ArrayList<>();
-    private final  LinkedHashMap<Integer,Integer> countMap = new LinkedHashMap<>();
+
+    private final LinkedHashMap<Integer,Integer> countMap = new LinkedHashMap<>();
+
+    public Integers(String filePath) { super(filePath); }
+
+    public Integers() { super(); }
 
     @Override
     public void naturalSort() {
@@ -24,6 +29,38 @@ public class Integers implements Sorter {
         read();
         sort();
         printNumbersAndCount();
+    }
+
+    void readFromTerminal() {
+        while (scannerFromTerminal.hasNext()) {
+            if (scannerFromTerminal.hasNextInt()) {
+                numbers.add(scannerFromTerminal.nextInt());
+            } else {
+                String input = scannerFromTerminal.next();
+                if (input.equalsIgnoreCase("q")) {
+                    break;
+                } else {
+                    System.out.printf("\"%s\" is not an integer. It will be skipped.%n", input);
+                }
+            }
+        }
+        scannerFromTerminal.close();
+    }
+
+   void readFromFile() {
+        while (scannerFromFile.hasNext()) {
+            if (scannerFromFile.hasNextInt()) {
+                numbers.add(scannerFromFile.nextInt());
+            } else {
+                String input = scannerFromFile.next();
+                if (input.equalsIgnoreCase("q")) {
+                    break;
+                } else {
+                    System.out.printf("\"%s\" is not an integer. It will be skipped.%n", input);
+                }
+            }
+        }
+        scannerFromFile.close();
     }
 
     private void sort() {
@@ -49,22 +86,6 @@ public class Integers implements Sorter {
         for (Map.Entry<Integer,Integer> entry: numbersFromMap) {
             countMap.put(entry.getKey(), entry.getValue());
         }
-    }
-
-    private void read() {
-        while (scanner.hasNext()) {
-            if (scanner.hasNextInt()) {
-                numbers.add(scanner.nextInt());
-            } else {
-                String input = scanner.next();
-                if (input.equalsIgnoreCase("q")) {
-                    break;
-                } else {
-                    System.out.printf("\"%s\" is not an integer. It will be skipped.%n", input);
-                }
-            }
-        }
-        scanner.close();
     }
 
     private void printNumbers() {

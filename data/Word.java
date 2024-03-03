@@ -7,9 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Word implements Sorter {
+public class Word extends Sorter {
+
     private final List<String> words = new ArrayList<>();
+
     private final LinkedHashMap<String, Integer> countMap = new LinkedHashMap<>();
+
+    public Word(String filePath) { super(filePath); }
+
+    public Word() { super();}
 
     @Override
     public void naturalSort() {
@@ -25,9 +31,21 @@ public class Word implements Sorter {
         printWordsAndCount();
     }
 
-    private void read() {
-        while (scanner.hasNext()) {
-            String input = scanner.next();
+    void readFromTerminal() {
+        while (scannerFromTerminal.hasNext()) {
+            String input = scannerFromTerminal.next();
+
+            if (input.equalsIgnoreCase("q")) {
+                break;
+            } else {
+                words.add(input);
+            }
+        }
+    }
+
+    void readFromFile() {
+        while (scannerFromFile.hasNext()) {
+            String input = scannerFromFile.next();
 
             if (input.equalsIgnoreCase("q")) {
                 break;

@@ -7,10 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Longs implements Sorter {
+public class Longs extends Sorter {
+
     private final List<Long> longs = new ArrayList<>();
 
     private final Map<Long,Integer> countMap = new LinkedHashMap<>();
+
+    public Longs(String filePath) { super(filePath); }
+
+    public Longs() { super();}
 
     @Override
     public void naturalSort() {
@@ -26,12 +31,27 @@ public class Longs implements Sorter {
         printLongsAndCount();
     }
 
-    private void read() {
-        while(scanner.hasNext()){
-            if (scanner.hasNextLong()) {
-                longs.add(scanner.nextLong());
+    void readFromTerminal() {
+        while(scannerFromTerminal.hasNext()){
+            if (scannerFromTerminal.hasNextLong()) {
+                longs.add(scannerFromTerminal.nextLong());
             } else {
-                String input = scanner.next();
+                String input = scannerFromTerminal.next();
+                if (input.equalsIgnoreCase("q")) {
+                    break;
+                } else {
+                    System.out.printf("\"%s\" is not a long. It will be skipped.%n", input);
+                }
+            }
+        }
+    }
+
+    void readFromFile() {
+        while(scannerFromFile.hasNext()){
+            if (scannerFromFile.hasNextLong()) {
+                longs.add(scannerFromFile.nextLong());
+            } else {
+                String input = scannerFromFile.next();
                 if (input.equalsIgnoreCase("q")) {
                     break;
                 } else {
