@@ -1,5 +1,8 @@
 package sorting.data;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public abstract class  Sorter {
@@ -23,11 +26,21 @@ public abstract class  Sorter {
 
     abstract void readFromScanner(Scanner scannerFromTerminal);
 
+    abstract void print(Boolean includeCount);
+
     void readData() {
         if (inputFilePath == null) {
             readFromTerminal();
         } else {
             readFromFile();
+        }
+    }
+
+    void outputData(Boolean includeData) {
+        if (outputFilePath == null) {
+            print(includeData);
+        } else {
+            output(includeData);
         }
     }
 
@@ -37,5 +50,16 @@ public abstract class  Sorter {
 
     private void readFromFile() {
         readFromScanner(scannerFromFile);
+    }
+
+    private void output(Boolean includeCount) {
+        try (PrintStream printStream = new PrintStream(new FileOutputStream(outputFilePath))) {
+            // Redirect standard output to the file
+            System.setOut(printStream);
+            print(includeCount);
+        } catch (IOException e) {
+            // Handle IO exception
+            System.err.println("Error writing to the file: " + e.getMessage());
+        }
     }
 }

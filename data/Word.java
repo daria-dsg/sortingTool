@@ -16,14 +16,14 @@ public class Word extends Sorter {
     public void naturalSort() {
         readData();
         Collections.sort(words);
-        print(false);
+        outputData(false);
     }
 
     @Override
     public void sortByCount() {
         readData();
         sort();
-        print(true);
+        outputData(true);
     }
 
     @Override

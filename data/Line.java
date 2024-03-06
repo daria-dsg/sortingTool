@@ -16,19 +16,18 @@ public class Line extends Sorter {
     public void naturalSort() {
         readData();
         Collections.sort(lines);
-        print(false);
+        outputData(false);
     }
 
     @Override
     public void sortByCount() {
         readData();
         sort();
-        print(true);
+        outputData(true);
     }
 
     void readFromScanner(Scanner scanner) {
         String input;
-
         while (scanner.hasNextLine()) {
             input = scanner.nextLine();
             if (input.equalsIgnoreCase("q")) {
@@ -37,7 +36,6 @@ public class Line extends Sorter {
                 lines.add(input);
             }
         }
-
         scanner.close();
     }
 
@@ -66,7 +64,8 @@ public class Line extends Sorter {
         }
     }
 
-    private void print(Boolean includeCount) {
+    @Override
+    void print(Boolean includeCount) {
         System.out.printf("Total lines: %d.%n", lines.size());
         if (includeCount) {
             countMap.forEach((line, count) -> {
@@ -77,4 +76,6 @@ public class Line extends Sorter {
             lines.forEach(System.out::println);
         }
     }
+
+
 }

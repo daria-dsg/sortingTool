@@ -16,14 +16,14 @@ public class Longs extends Sorter {
     public void naturalSort() {
         readData();
         Collections.sort(longs);
-        print(false);
+        outputData(false);
     }
 
     @Override
     public void sortByCount() {
         readData();
         sort();
-        print(true);
+        outputData(true);
     }
 
     @Override

@@ -19,22 +19,14 @@ public class Integers extends Sorter {
     public void naturalSort() {
         readData();
         Collections.sort(numbers);
-        if (outputFilePath == null) {
-            print(false);
-        } else {
-            output(false);
-        }
+        outputData(false);
     }
 
     @Override
     public void sortByCount() {
         readData();
         sort();
-        if (outputFilePath == null) {
-            print(true);
-        } else {
-            output(true);
-        }
+        outputData(true);
     }
 
     @Override
@@ -79,7 +71,8 @@ public class Integers extends Sorter {
         }
     }
 
-    private void print(Boolean includeCount) {
+    @Override
+    void print(Boolean includeCount) {
         System.out.printf("Total numbers: %d.%n", numbers.size());
 
         if (includeCount) {
@@ -90,17 +83,6 @@ public class Integers extends Sorter {
         } else {
             System.out.print("Sorted data:");
             numbers.forEach(num -> System.out.print(num + " "));
-        }
-    }
-
-    private void output(Boolean includeCount) {
-        try (PrintStream printStream = new PrintStream(new FileOutputStream(outputFilePath))) {
-            // Redirect standard output to the file
-            System.setOut(printStream);
-            print(includeCount);
-        } catch (IOException e) {
-            // Handle IO exception
-            System.err.println("Error writing to the file: " + e.getMessage());
         }
     }
 }
