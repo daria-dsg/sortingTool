@@ -20,7 +20,7 @@ public class Integers extends Sorter {
         readData();
         Collections.sort(numbers);
         if (outputFilePath == null) {
-            printNumbers(false);
+            print(false);
         } else {
             outputNumbersToFile();
         }
@@ -31,7 +31,7 @@ public class Integers extends Sorter {
         readData();
         sort();
         if (outputFilePath == null) {
-            printNumbers(true);
+            print(true);
         } else {
             outputNumbersAndCountToFile();
         }
@@ -79,7 +79,7 @@ public class Integers extends Sorter {
         }
     }
 
-    private void printNumbers(Boolean includeCount) {
+    private void print(Boolean includeCount) {
         System.out.printf("Total numbers: %d.%n", numbers.size());
 
         if (includeCount) {
@@ -92,7 +92,6 @@ public class Integers extends Sorter {
             numbers.forEach(num -> System.out.print(num + " "));
         }
     }
-
 
     private void outputNumbersToFile() {
         try (PrintStream printStream = new PrintStream(new FileOutputStream(outputFilePath))) {
