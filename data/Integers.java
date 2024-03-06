@@ -1,11 +1,9 @@
 package sorting.data;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.*;
 
 public class Integers extends Sorter {
 
@@ -13,30 +11,46 @@ public class Integers extends Sorter {
 
     private final LinkedHashMap<Integer,Integer> countMap = new LinkedHashMap<>();
 
-    public Integers(String filePath) { super(filePath); }
-
-    public Integers() { super(); }
+    public Integers(String inputFilePath, String outputFilePath) {
+        super(inputFilePath, outputFilePath);
+    }
 
     @Override
     public void naturalSort() {
         read();
         Collections.sort(numbers);
-        printNumbers();
+        if (outputFilePath == null) {
+            printNumbers();
+        } else {
+            outputNumbersToFile();
+        }
     }
 
     @Override
     public void sortByCount() {
         read();
         sort();
-        printNumbersAndCount();
+        if (outputFilePath == null) {
+            printNumbersAndCount();
+        } else {
+            outputNumbersAndCountToFile();
+        }
     }
 
-    void readFromTerminal() {
-        while (scannerFromTerminal.hasNext()) {
-            if (scannerFromTerminal.hasNextInt()) {
-                numbers.add(scannerFromTerminal.nextInt());
+    void readFromTerminal(Scanner scannerFromTerminal) {
+        readFromFile(scannerFromTerminal);
+    }
+
+   void readFromFile(Scanner scannerFromFile) {
+        readFromScanner(scannerFromFile);
+    }
+
+    private void readFromScanner(Scanner scanner) {
+        while (scanner.hasNext()) {
+            if (scanner.hasNextInt()) {
+                numbers.add(scanner.nextInt());
             } else {
-                String input = scannerFromTerminal.next();
+                String input = scanner.next();
                 if (input.equalsIgnoreCase("q")) {
                     break;
                 } else {
@@ -44,23 +58,7 @@ public class Integers extends Sorter {
                 }
             }
         }
-        scannerFromTerminal.close();
-    }
-
-   void readFromFile() {
-        while (scannerFromFile.hasNext()) {
-            if (scannerFromFile.hasNextInt()) {
-                numbers.add(scannerFromFile.nextInt());
-            } else {
-                String input = scannerFromFile.next();
-                if (input.equalsIgnoreCase("q")) {
-                    break;
-                } else {
-                    System.out.printf("\"%s\" is not an integer. It will be skipped.%n", input);
-                }
-            }
-        }
-        scannerFromFile.close();
+        scanner.close();
     }
 
     private void sort() {
@@ -100,5 +98,33 @@ public class Integers extends Sorter {
             System.out.print(num + ": ");
             System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ numbers.size());
         });
+    }
+
+    private void outputNumbersToFile() {
+        try (PrintStream printStream = new PrintStream(new FileOutputStream(outputFilePath))) {
+            // Redirect standard output to the file
+            System.setOut(printStream);
+            System.out.printf("Total numbers: %d.%n", numbers.size());
+            System.out.print("Sorted data:");
+            numbers.forEach(num -> System.out.print(num + " "));
+
+        } catch (IOException e) {
+            // Handle IO exception
+            System.err.println("Error writing to the file: " + e.getMessage());
+        }
+    }
+
+    private void outputNumbersAndCountToFile() {
+        try (PrintStream printStream = new PrintStream(new FileOutputStream(outputFilePath))) {
+            System.setOut(printStream);
+
+            System.out.printf("Total numbers: %d.%n", numbers.size());
+            countMap.forEach((num, count) -> {
+                System.out.print(num + ": ");
+                System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ numbers.size());
+            });
+        } catch (IOException e) {
+            System.err.println("Error writing to the file: " + e.getMessage());
+        }
     }
 }
