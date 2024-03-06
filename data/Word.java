@@ -16,14 +16,14 @@ public class Word extends Sorter {
     public void naturalSort() {
         readData();
         Collections.sort(words);
-        printWords();
+        print(false);
     }
 
     @Override
     public void sortByCount() {
         readData();
         sort();
-        printWordsAndCount();
+        print(true);
     }
 
     @Override
@@ -64,18 +64,18 @@ public class Word extends Sorter {
         }
     }
 
-    private void printWords() {
+    @Override
+    void print(Boolean includeCount) {
         System.out.printf("Total words: %d.%n", words.size());
-        System.out.println("Sorted data: ");
-        words.forEach(word -> System.out.print(word + " "));
-    }
 
-    private void printWordsAndCount() {
-        System.out.printf("Total words: %d.%n", words.size());
-        countMap.forEach((word, count) -> {
-            System.out.print(word + ": ");
-            System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ words.size());
-        });
+        if (includeCount) {
+            countMap.forEach((word, count) -> {
+                System.out.print(word + ": ");
+                System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ words.size());
+            });
+        } else {
+            System.out.println("Sorted data: ");
+            words.forEach(word -> System.out.print(word + " "));
+        }
     }
-
 }
