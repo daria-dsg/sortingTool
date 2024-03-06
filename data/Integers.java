@@ -22,7 +22,7 @@ public class Integers extends Sorter {
         if (outputFilePath == null) {
             print(false);
         } else {
-            outputNumbersToFile();
+            output(false);
         }
     }
 
@@ -33,7 +33,7 @@ public class Integers extends Sorter {
         if (outputFilePath == null) {
             print(true);
         } else {
-            outputNumbersAndCountToFile();
+            output(true);
         }
     }
 
@@ -93,30 +93,13 @@ public class Integers extends Sorter {
         }
     }
 
-    private void outputNumbersToFile() {
+    private void output(Boolean includeCount) {
         try (PrintStream printStream = new PrintStream(new FileOutputStream(outputFilePath))) {
             // Redirect standard output to the file
             System.setOut(printStream);
-            System.out.printf("Total numbers: %d.%n", numbers.size());
-            System.out.print("Sorted data:");
-            numbers.forEach(num -> System.out.print(num + " "));
-
+            print(includeCount);
         } catch (IOException e) {
             // Handle IO exception
-            System.err.println("Error writing to the file: " + e.getMessage());
-        }
-    }
-
-    private void outputNumbersAndCountToFile() {
-        try (PrintStream printStream = new PrintStream(new FileOutputStream(outputFilePath))) {
-            System.setOut(printStream);
-
-            System.out.printf("Total numbers: %d.%n", numbers.size());
-            countMap.forEach((num, count) -> {
-                System.out.print(num + ": ");
-                System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ numbers.size());
-            });
-        } catch (IOException e) {
             System.err.println("Error writing to the file: " + e.getMessage());
         }
     }
