@@ -16,14 +16,14 @@ public class Longs extends Sorter {
     public void naturalSort() {
         readData();
         Collections.sort(longs);
-        printLongs();
+        print(false);
     }
 
     @Override
     public void sortByCount() {
         readData();
         sort();
-        printLongsAndCount();
+        print(true);
     }
 
     @Override
@@ -41,7 +41,6 @@ public class Longs extends Sorter {
             }
         }
     }
-
 
     private void sort() {
         for (long num  : longs) {
@@ -68,17 +67,18 @@ public class Longs extends Sorter {
         }
     }
 
-    private void printLongs() {
-        System.out.printf("Total numbers: %d.%n", longs.size());
-        System.out.print("Sorted data:");
-        longs.forEach(num -> System.out.print(num + " "));
-    }
 
-    private void printLongsAndCount() {
+    @Override
+    void print(Boolean includeCount) {
         System.out.printf("Total numbers: %d.%n", longs.size());
-        countMap.forEach((num, count) -> {
-            System.out.print(num + ": ");
-            System.out.printf("%d time(s), %d%%.%n",count , (100 * count)/ longs.size());
-        });
+        if (includeCount) {
+            countMap.forEach((num, count) -> {
+                System.out.print(num + ": ");
+                System.out.printf("%d time(s), %d%%.%n",count , (100 * count)/ longs.size());
+            });
+        } else {
+            System.out.print("Sorted data:");
+            longs.forEach(num -> System.out.print(num + " "));
+        }
     }
 }
