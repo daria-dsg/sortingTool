@@ -1,11 +1,6 @@
 package sorting.data;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class Line extends Sorter {
 
@@ -13,29 +8,29 @@ public class Line extends Sorter {
 
     private final LinkedHashMap<String, Integer>  countMap= new LinkedHashMap<>();
 
-    public Line(String filePath) { super(filePath); }
-
-    public Line() { super();}
+    public Line(String inputFilePath, String outputFilePath) {
+        super(inputFilePath, outputFilePath);
+    }
 
     @Override
     public void naturalSort() {
-        read();
+        readData();
         Collections.sort(lines);
         printLines();
     }
 
     @Override
     public void sortByCount() {
-        read();
+        readData();
         sort();
         printLinesAndCount();
     }
 
-    void readFromTerminal() {
+    void readFromScanner(Scanner scanner) {
         String input;
 
-        while (scannerFromTerminal.hasNextLine()) {
-            input = scannerFromTerminal.nextLine();
+        while (scanner.hasNextLine()) {
+            input = scanner.nextLine();
             if (input.equalsIgnoreCase("q")) {
                 break;
             } else {
@@ -43,22 +38,7 @@ public class Line extends Sorter {
             }
         }
 
-        scannerFromTerminal.close();
-    }
-
-    void readFromFile() {
-        String input;
-
-        while (scannerFromFile.hasNextLine()) {
-            input = scannerFromFile.nextLine();
-            if (input.equalsIgnoreCase("q")) {
-                break;
-            } else {
-                lines.add(input);
-            }
-        }
-
-        scannerFromFile.close();
+        scanner.close();
     }
 
     private void sort() {

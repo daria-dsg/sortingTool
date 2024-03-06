@@ -1,11 +1,6 @@
 package sorting.data;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class Word extends Sorter {
 
@@ -13,39 +8,28 @@ public class Word extends Sorter {
 
     private final LinkedHashMap<String, Integer> countMap = new LinkedHashMap<>();
 
-    public Word(String filePath) { super(filePath); }
-
-    public Word() { super();}
+    public Word(String inputFilePath, String outputFilePath) {
+        super(inputFilePath, outputFilePath);
+    }
 
     @Override
     public void naturalSort() {
-        read();
+        readData();
         Collections.sort(words);
         printWords();
     }
 
     @Override
     public void sortByCount() {
-        read();
+        readData();
         sort();
         printWordsAndCount();
     }
 
-    void readFromTerminal() {
-        while (scannerFromTerminal.hasNext()) {
-            String input = scannerFromTerminal.next();
-
-            if (input.equalsIgnoreCase("q")) {
-                break;
-            } else {
-                words.add(input);
-            }
-        }
-    }
-
-    void readFromFile() {
-        while (scannerFromFile.hasNext()) {
-            String input = scannerFromFile.next();
+    @Override
+    void readFromScanner(Scanner scanner ) {
+        while (scanner.hasNext()) {
+            String input = scanner.next();
 
             if (input.equalsIgnoreCase("q")) {
                 break;

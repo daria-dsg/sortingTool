@@ -5,29 +5,37 @@ import java.util.Scanner;
 public abstract class  Sorter {
     Scanner scannerFromTerminal = new Scanner(System.in);
     Scanner scannerFromFile;
-    Boolean isFile;
+    String inputFilePath;
+    String outputFilePath;
 
-    public Sorter() {
-        isFile = false;
-    }
+    public Sorter(String inputFilePath, String outputFilePath) {
+        this.inputFilePath = inputFilePath;
+        this.outputFilePath = outputFilePath;
 
-    public Sorter(String filePath) {
-        scannerFromFile = new Scanner(filePath);
-        isFile = true;
+        if (outputFilePath != null) {
+            scannerFromFile = new Scanner(this.inputFilePath);
+        }
     }
 
     public abstract void naturalSort();
 
     public abstract void sortByCount();
 
-    abstract void readFromTerminal();
-    abstract void readFromFile();
+    abstract void readFromScanner(Scanner scannerFromTerminal);
 
-    void read() {
-        if (isFile) {
-            readFromFile();
-        } else {
+    void readData() {
+        if (inputFilePath == null) {
             readFromTerminal();
+        } else {
+            readFromFile();
         }
+    }
+
+    private void readFromTerminal() {
+        readFromScanner(scannerFromTerminal);
+    }
+
+    private void readFromFile() {
+        readFromScanner(scannerFromFile);
     }
 }

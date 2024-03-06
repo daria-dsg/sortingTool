@@ -1,11 +1,6 @@
 package sorting.data;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class Longs extends Sorter {
 
@@ -13,30 +8,31 @@ public class Longs extends Sorter {
 
     private final Map<Long,Integer> countMap = new LinkedHashMap<>();
 
-    public Longs(String filePath) { super(filePath); }
-
-    public Longs() { super();}
+    public Longs(String inputFilePath, String outputFilePath) {
+        super(inputFilePath, outputFilePath);
+    }
 
     @Override
     public void naturalSort() {
-        read();
+        readData();
         Collections.sort(longs);
         printLongs();
     }
 
     @Override
     public void sortByCount() {
-        read();
+        readData();
         sort();
         printLongsAndCount();
     }
 
-    void readFromTerminal() {
-        while(scannerFromTerminal.hasNext()){
-            if (scannerFromTerminal.hasNextLong()) {
-                longs.add(scannerFromTerminal.nextLong());
+    @Override
+    void readFromScanner(Scanner scanner) {
+        while(scanner.hasNext()){
+            if (scanner.hasNextLong()) {
+                longs.add(scanner.nextLong());
             } else {
-                String input = scannerFromTerminal.next();
+                String input = scanner.next();
                 if (input.equalsIgnoreCase("q")) {
                     break;
                 } else {
@@ -46,20 +42,6 @@ public class Longs extends Sorter {
         }
     }
 
-    void readFromFile() {
-        while(scannerFromFile.hasNext()){
-            if (scannerFromFile.hasNextLong()) {
-                longs.add(scannerFromFile.nextLong());
-            } else {
-                String input = scannerFromFile.next();
-                if (input.equalsIgnoreCase("q")) {
-                    break;
-                } else {
-                    System.out.printf("\"%s\" is not a long. It will be skipped.%n", input);
-                }
-            }
-        }
-    }
 
     private void sort() {
         for (long num  : longs) {

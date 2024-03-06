@@ -17,7 +17,7 @@ public class Integers extends Sorter {
 
     @Override
     public void naturalSort() {
-        read();
+        readData();
         Collections.sort(numbers);
         if (outputFilePath == null) {
             printNumbers();
@@ -28,7 +28,7 @@ public class Integers extends Sorter {
 
     @Override
     public void sortByCount() {
-        read();
+        readData();
         sort();
         if (outputFilePath == null) {
             printNumbersAndCount();
@@ -37,15 +37,8 @@ public class Integers extends Sorter {
         }
     }
 
-    void readFromTerminal(Scanner scannerFromTerminal) {
-        readFromFile(scannerFromTerminal);
-    }
-
-   void readFromFile(Scanner scannerFromFile) {
-        readFromScanner(scannerFromFile);
-    }
-
-    private void readFromScanner(Scanner scanner) {
+    @Override
+    void readFromScanner(Scanner scanner) {
         while (scanner.hasNext()) {
             if (scanner.hasNextInt()) {
                 numbers.add(scanner.nextInt());
