@@ -16,14 +16,14 @@ public class Line extends Sorter {
     public void naturalSort() {
         readData();
         Collections.sort(lines);
-        printLines();
+        print(false);
     }
 
     @Override
     public void sortByCount() {
         readData();
         sort();
-        printLinesAndCount();
+        print(true);
     }
 
     void readFromScanner(Scanner scanner) {
@@ -66,16 +66,15 @@ public class Line extends Sorter {
         }
     }
 
-    private void printLinesAndCount() {
+    private void print(Boolean includeCount) {
         System.out.printf("Total lines: %d.%n", lines.size());
-        countMap.forEach((line, count) -> {
-            System.out.print(line + ": ");
-            System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ lines.size());
-        });
-    }
-
-    private void printLines() {
-        System.out.printf("Total lines: %d.%n", lines.size());
-        lines.forEach(System.out::println);
+        if (includeCount) {
+            countMap.forEach((line, count) -> {
+                System.out.print(line + ": ");
+                System.out.printf("(%d time(s), %d%%).%n",count , (100 * count)/ lines.size());
+            });
+        } else {
+            lines.forEach(System.out::println);
+        }
     }
 }
