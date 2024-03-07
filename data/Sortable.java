@@ -1,6 +1,5 @@
 package sorting.data;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -23,7 +22,7 @@ public abstract class Sortable<T extends Comparable<T>> {
         this.inputFilePath = inputFilePath;
         this.outputFilePath = outputFilePath;
 
-        if (outputFilePath != null) {
+        if (inputFilePath != null) {
             scannerFromFile = new Scanner(this.inputFilePath);
         }
     }
@@ -95,10 +94,8 @@ public abstract class Sortable<T extends Comparable<T>> {
 
     private void output(Boolean includeCount) {
         try {
-            File file = new File("out.txt");
-            file.createNewFile();
             // Redirect standard output to the file
-            PrintStream printStream = new PrintStream(new FileOutputStream(file));
+            PrintStream printStream = new PrintStream(new FileOutputStream(outputFilePath));
             System.setOut(printStream);
             print(includeCount);
         } catch (IOException e) {
