@@ -9,13 +9,12 @@ import java.util.Set;
 public class ParseArgs {
 
     private static String sorter = "natural";
-    private static Sorter dataType;
-
-    private static String filePath;
-    private static boolean isFile = false;
+    private static String inputFilePath ;
+    private static String outputFilePath;
+    private static Sortable<?> dataType;
 
     private static final Set<String> KNOWN_ARGUMENTS = Set.of(
-            "-sortingType", "-dataType", "line", "word", "integer", "long", "natural", "byCount", "-inputFile"
+            "-sortingType", "-dataType", "line", "word", "integer", "long", "natural", "byCount", "-inputFile", "-outputFile"
     );
 
     private static final Set<String> VALID_SORTER_TYPES = Set.of("natural", "byCount");
@@ -32,9 +31,13 @@ public class ParseArgs {
                     checkAndSetDataType(args, i);
                     i++;
                 } else if ("-inputFile".equals(argument)) {
-                    checkAndSetFilePath(args, i);
+                    checkAndSetInputFilePath(args, i);
                     i++;
-                } else if (!KNOWN_ARGUMENTS.contains(argument)) {
+                } else if ("-outputFile".equals(argument)) {
+                    checkAndSetOutputFilePath(args, i);
+                    i++;
+                }
+                else if (!KNOWN_ARGUMENTS.contains(argument)) {
                     System.out.println("\"" + argument + "\" is not a valid parameter. It will be skipped.");
                 }
 
@@ -42,13 +45,17 @@ public class ParseArgs {
                 break;
             }
         }
+
+        if (dataType == null) {
+            dataType = new Word(inputFilePath, outputFilePath);
+        }
     }
 
     public static String getSorter() {
         return sorter;
     }
 
-    public static Sorter getDataType() {
+    public static Sortable<?> getDataType() {
         return dataType;
     }
 
@@ -57,12 +64,21 @@ public class ParseArgs {
         sorter = args[i + 1];
     }
 
-    private static void checkAndSetFilePath(String[] args, int i){
+    private static void checkAndSetInputFilePath(String[] args, int i){
         String pathString = args[i + 1];
         try {
             Paths.get(pathString);
-            filePath  = pathString;
-            isFile = true;
+            inputFilePath  = pathString;
+        } catch (InvalidPathException e) {
+            throw new IllegalStateException("No file path defined");
+        }
+    }
+
+    private static void checkAndSetOutputFilePath(String[] args, int i){
+        String pathString = args[i + 1];
+        try {
+            Paths.get(pathString);
+            outputFilePath  = pathString;
         } catch (InvalidPathException e) {
             throw new IllegalStateException("No file path defined");
         }
@@ -71,15 +87,10 @@ public class ParseArgs {
     private static void  checkAndSetDataType(String[] args, int i){
         checkDataType(args[i + 1]);
         dataType = switch (args[i + 1]) {
-            case "integer" ->
-                    isFile ? new Integers(filePath) : new Integers();
-            case "line" ->
-                    isFile ? new Line(filePath) : new Line();
-            case "long" ->
-                    isFile ? new Longs(filePath) : new Longs();
-            case "word" ->
-                    isFile ? new Word(filePath) : new Word();
-            default -> new Word();
+            case "integer" -> new Integers(inputFilePath, outputFilePath);
+            case "line" ->  new Line(inputFilePath, outputFilePath);
+            case "long" ->  new Longs(inputFilePath, outputFilePath);
+            default -> new Word(inputFilePath, outputFilePath);
         };
     }
 
